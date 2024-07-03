@@ -1,5 +1,5 @@
 function add(num1, num2){
-    return num1 + num2;
+    return parseFloat(num1) + parseFloat(num2);
 }
 
 function subtract(num1, num2){
@@ -21,26 +21,36 @@ let secondNum = '';
 function operate(op, num1, num2){
     switch(op){
         case '+':
-            add(num1, num2);
+            firstNum = add(num1, num2);
+            operat = '';
+            secondNum = '';
             break;
         case '-':
-            subtract(num1, num2);
+            firstNum = subtract(num1, num2);
+            operat = '';
+            secondNum = '';
             break;
         case '*':
-            multiply(num1, num2);
+            firstNum = multiply(num1, num2);
+            operat = '';
+            secondNum = '';
             break;
         case '/':
-            divide(num1, num2);
+            firstNum = divide(num1, num2);
+            operat = '';
+            secondNum = '';
             break;    
     }
 }
 
 const buttons = document.querySelectorAll('button');
 const problem = document.querySelector('#problem');
+const answer = document.querySelector('#answer');
 
 for(let i = 0; i < buttons.length; i++){
     buttons[i].addEventListener('click', () => { 
         displayNumber(buttons[i].id);
+        operator(buttons[i].id);
     });
 }
 let displayNum = '0';
@@ -91,5 +101,46 @@ switch(btnId){
                 break;           
         }
 }
+
+function updateExpression(){
+    if(secondNum !== ''){
+        operate(operat,firstNum,secondNum);             
+    }
+    if(firstNum === '') firstNum = displayNum;
+    if(operat !== '' && secondNum === ''){
+        secondNum = displayNum;
+        operate(operat, firstNum, secondNum);     
+    }
+    displayNum = '0';
+    problem.textContent = displayNum;
+    if(decimalCheck > 0) decimalCheck--;
+}
+
+function operator(btnId){
+    switch(btnId){
+        case 'plus':
+            updateExpression();
+            operat = '+'           
+            answer.textContent = firstNum + operat + secondNum;   
+            break;
+        case 'minus':
+            updateExpression();
+            operat = '-'
+            answer.textContent = firstNum + operat + secondNum;
+            break;
+        case 'multiply':
+            updateExpression();
+            operat = '*'
+            answer.textContent = firstNum + operat + secondNum;
+            break;
+        case 'divide':
+            updateExpression();
+            operat = '/'
+            answer.textContent = firstNum + operat + secondNum;
+            break;
+    }
+}
+
+
 
 
