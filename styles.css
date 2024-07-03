@@ -25,6 +25,24 @@
 #display{
     flex: 2;
     border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+#answer{
+    flex: 2;
+    border: 1px solid black;    
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#problem{
+    flex: 1;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 .btn-row{
     flex: 1;
