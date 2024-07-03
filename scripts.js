@@ -15,7 +15,7 @@ function divide(num1, num2){
 }
 
 let firstNum = '';
-let operator = '';
+let operat = '';
 let secondNum = '';
 
 function operate(op, num1, num2){
@@ -40,53 +40,49 @@ const problem = document.querySelector('#problem');
 
 for(let i = 0; i < buttons.length; i++){
     buttons[i].addEventListener('click', () => { 
-        problemDisplay(buttons[i].id);
+        displayNumber(buttons[i].id);
     });
 }
-let displayNum = '';
+let displayNum = '0';
 let decimalCheck = 0;
 
-function problemDisplay(btnId){
+function packDisplayNum(digit){
+    if(displayNum === '0') displayNum='';
+    displayNum += digit;
+    problem.textContent = displayNum;
+}
+
+function displayNumber(btnId){
 switch(btnId){
             case 'seven':
-                displayNum += '7';
-                problem.textContent = displayNum;
+                packDisplayNum('7');
                 break;
             case 'eight':
-                displayNum += '8';
-                problem.textContent = displayNum;
+                packDisplayNum('8');
                 break; 
             case 'nine':
-                displayNum += '9';
-                problem.textContent = displayNum;
+                packDisplayNum('9');
                 break;
             case 'four':
-                displayNum += '4';
-                problem.textContent = displayNum;
+                packDisplayNum('4');
                 break;
             case 'five':
-                displayNum += '5';
-                problem.textContent = displayNum ;
+                packDisplayNum('5');
                 break;
             case 'six':
-                displayNum += '6';
-                problem.textContent = displayNum;
+                packDisplayNum('6');
                 break;
             case 'one':
-                displayNum += '1';
-                problem.textContent = displayNum;
+                packDisplayNum('1');
                 break;
             case 'two':
-                displayNum += '2';
-                problem.textContent = displayNum;
+                packDisplayNum('2');
                 break;
             case 'three':
-                displayNum += '3';
-                problem.textContent = displayNum;
+                packDisplayNum('3');
                 break;
             case 'zero':
-                displayNum += '0';
-                problem.textContent = displayNum;
+                packDisplayNum('0');
                 break;
             case 'point':
                 if(decimalCheck === 0) displayNum += '.';
@@ -95,3 +91,5 @@ switch(btnId){
                 break;           
         }
 }
+
+
