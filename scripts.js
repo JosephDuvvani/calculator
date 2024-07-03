@@ -14,9 +14,9 @@ function divide(num1, num2){
     return num1 / num2;
 }
 
-let firstNum = 0;
+let firstNum = '';
 let operator = '';
-let secondNum = 0;
+let secondNum = '';
 
 function operate(op, num1, num2){
     switch(op){
@@ -36,70 +36,62 @@ function operate(op, num1, num2){
 }
 
 const buttons = document.querySelectorAll('button');
+const problem = document.querySelector('#problem');
 
 for(let i = 0; i < buttons.length; i++){
-    buttons[i].addEventListener('click', () => {
-        switch(buttons[i].id){
-            case 'sign':
-                
-                break;
-            case 'clear-entry':
-                
-                break; 
-            case 'all-clear':
-                
-                break;
-            case 'percent':
-                
-                break;
+    buttons[i].addEventListener('click', () => { 
+        problemDisplay(buttons[i].id);
+    });
+}
+let displayNum = '';
+let decimalCheck = 0;
+
+function problemDisplay(btnId){
+switch(btnId){
             case 'seven':
-                
+                displayNum += '7';
+                problem.textContent = displayNum;
                 break;
             case 'eight':
-                
+                displayNum += '8';
+                problem.textContent = displayNum;
                 break; 
             case 'nine':
-                
-                break;
-            case 'divide':
-                
+                displayNum += '9';
+                problem.textContent = displayNum;
                 break;
             case 'four':
-                
+                displayNum += '4';
+                problem.textContent = displayNum;
                 break;
             case 'five':
-                
+                displayNum += '5';
+                problem.textContent = displayNum ;
                 break;
             case 'six':
-                
-                break;
-            case 'multiply':
-                
+                displayNum += '6';
+                problem.textContent = displayNum;
                 break;
             case 'one':
-                
+                displayNum += '1';
+                problem.textContent = displayNum;
                 break;
             case 'two':
-                
+                displayNum += '2';
+                problem.textContent = displayNum;
                 break;
             case 'three':
-                
-                break;
-            case 'minus':
-                
+                displayNum += '3';
+                problem.textContent = displayNum;
                 break;
             case 'zero':
-                
+                displayNum += '0';
+                problem.textContent = displayNum;
                 break;
             case 'point':
-                
-                break;
-            case 'equals':
-                
-                break;
-            case 'plus':
-                
-                break;            
+                if(decimalCheck === 0) displayNum += '.';
+                decimalCheck++;
+                problem.textContent = displayNum;
+                break;           
         }
-    });
 }
