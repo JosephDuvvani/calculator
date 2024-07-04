@@ -1,17 +1,18 @@
 function add(num1, num2){
-    return parseFloat(num1) + parseFloat(num2);
+    return `${((Number(num1) + Number(num2)).toFixed(getBigDecimal(num1, num2))*10)/10}`;
 }
 
 function subtract(num1, num2){
-    return num1 - num2;
+    return `${((num1 - num2).toFixed(getBigDecimal(num1, num2))*10)/10}`;
 }
 
 function multiply(num1, num2){
-    return num1 * num2;
+    return `${((num1 * getDecimalMultiplier(num1)) * (num2 * getDecimalMultiplier(num2)))/
+        (getDecimalMultiplier(num1) * getDecimalMultiplier(num2))}`;
 }
 
 function divide(num1, num2){
-    return num1 / num2;
+    return `${((num1 / num2).toFixed(getBigDecimal(num1, num2))*10)/10}`;
 }
 
 let firstNum = '';
@@ -101,7 +102,15 @@ switch(btnId){
                 if(decimalCheck === 0) displayNum += '.';
                 decimalCheck++;
                 problem.textContent = displayNum;
-                break;           
+                break;
+            case 'sign':
+                if(displayNum !== '0') displayNum = `${displayNum * (-1)}`;
+                problem.textContent = displayNum;
+                break;
+            case 'percent':
+                displayNum = displayNum/100;
+                problem.textContent = displayNum;
+                break;
         }
 }
 
@@ -153,11 +162,36 @@ function updateExpression(op, num1, num2){
     }else {
         replaceOperat = op;
     }
-    (expression.textContent === '') ? expression.textContent += num1 + replaceOperat + num2 :
-    expression.textContent += replaceOperat + num2;
+    if (parseFloat(num2) < 0) num2 = `(${num2})`;
+    (expression.textContent === '') ? expression.textContent += `${num1} ${replaceOperat} ${num2}` :
+    expression.textContent += ` ${replaceOperat} ${num2}`;
 }
 
+function getDecimals(num){
+   if(!(num.indexOf('.'))) return 0;
+   let decimalPlaces = num.length - (num.indexOf('.') + 1);
+    
+   return decimalPlaces; 
+}
 
+function getBigDecimal(num1, num2){
+    let dec1 = getDecimals(num1);
+    let dec2 = getDecimals(num2);
+    if ( dec1 > dec2)
+        return dec1;
+    return dec2;
+}
+
+function getDecimalMultiplier(num){
+    if(!(num.indexOf('.'))) return 1;
+    let index = num.length - (num.indexOf('.') + 1);
+    let multiplier = '1';
+
+    for(let i = 0; i < index; i++){
+        multiplier += '0';
+    }
+    return multiplier;
+}
 
 
 
