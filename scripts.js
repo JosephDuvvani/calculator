@@ -121,6 +121,9 @@ switch(btnId){
                 displayNum = `${displayNum/100}`;
                 problem.textContent = displayNum;
                 break;
+            case 'equals':
+                equals();
+                break;
         }
 }
 
@@ -203,6 +206,13 @@ function getDecimalMultiplier(num){
     return multiplier;
 }
 
+function equals(){
+    operate(operat, firstNum, displayNum);
+    answer.textContent = firstNum;
 
+    displayNum = '0';
+    problem.textContent = displayNum;
+    if(decimalCheck > 0) decimalCheck--;
+}
 
 
