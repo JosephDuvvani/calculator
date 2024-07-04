@@ -124,6 +124,9 @@ switch(btnId){
             case 'equals':
                 equals();
                 break;
+            case 'clear-entry':
+                clearEntry();
+                break;
         }
 }
 
@@ -162,6 +165,9 @@ function operator(btnId){
             updateAnswer();
             operat = '/'
             answer.textContent = firstNum + operat + secondNum;
+            break;
+        case 'all-clear':
+            allClear();
             break;
     }
 }
@@ -213,6 +219,27 @@ function equals(){
     displayNum = '0';
     problem.textContent = displayNum;
     if(decimalCheck > 0) decimalCheck--;
+}
+
+function clearEntry(){
+    if(displayNum !== '0'){
+        displayNum = '0';
+        problem.textContent = displayNum;
+    } else if(operat !== ''){
+        operat = '';
+        answer.textContent = firstNum;
+    }
+}
+
+function allClear(){
+        firstNum = '';
+        operat = '';
+        secondNum = '';
+        displayNum = '0';
+
+        expression.textContent = '';
+        answer.textContent = '';
+        problem.textContent = displayNum;
 }
 
 
