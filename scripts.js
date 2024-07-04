@@ -1,18 +1,28 @@
 function add(num1, num2){
-    return `${((Number(num1) + Number(num2)).toFixed(getBigDecimal(num1, num2))*10)/10}`;
+    let ans = (Number(num1) + Number(num2)).toFixed(getBigDecimal(num1, num2));
+    let multiplier = getDecimalMultiplier(ans);
+
+    return `${(ans * multiplier)/multiplier}`;
 }
 
 function subtract(num1, num2){
-    return `${((num1 - num2).toFixed(getBigDecimal(num1, num2))*10)/10}`;
+    let ans = (Number(num1) - Number(num2)).toFixed(getBigDecimal(num1, num2));
+    let multiplier = getDecimalMultiplier(ans);
+    return `${(ans * multiplier)/multiplier}`;
 }
 
 function multiply(num1, num2){
-    return `${((num1 * getDecimalMultiplier(num1)) * (num2 * getDecimalMultiplier(num2)))/
-        (getDecimalMultiplier(num1) * getDecimalMultiplier(num2))}`;
+    let ans = (num1 * num2).toFixed(getBigDecimal(num1, num2));
+    let multiplier = getDecimalMultiplier(num1);
+
+    return `${((ans * multiplier))/multiplier}`;
 }
 
 function divide(num1, num2){
-    return `${((num1 / num2).toFixed(getBigDecimal(num1, num2))*10)/10}`;
+    let ans = (num1 / num2).toFixed(getBigDecimal(num1, num2));
+    let multiplier = getDecimalMultiplier(ans);
+
+    return `${(ans * multiplier) / multiplier}`;
 }
 
 let firstNum = '';
@@ -108,7 +118,7 @@ switch(btnId){
                 problem.textContent = displayNum;
                 break;
             case 'percent':
-                displayNum = displayNum/100;
+                displayNum = `${displayNum/100}`;
                 problem.textContent = displayNum;
                 break;
         }
