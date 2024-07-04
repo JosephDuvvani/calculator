@@ -243,9 +243,9 @@ function equals(){
 
 function clearEntry(){
         if(displayNum !== ''){
-            displayNum = '';
+            displayNum = displayNum.split('').slice(0, displayNum.length - 1).join('');
             problem.textContent = displayNum;
-        } else if(operat !== ''){
+        }else if(operat !== ''){
             operat = '';
             answer.textContent = firstNum;
         }
