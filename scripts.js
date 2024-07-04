@@ -115,8 +115,11 @@ switch(btnId){
                 packDisplayNum('0');
                 break;
             case 'point':
-                if(decimalCheck === 0) displayNum += '.';
-                decimalCheck++;
+                if(decimalCheck === 0) {
+                    if(displayNum === '') displayNum = '0';
+                    displayNum += '.';
+                    decimalCheck++;
+                }
                 problem.textContent = displayNum;
                 break;
             case 'sign':
@@ -124,6 +127,7 @@ switch(btnId){
                 problem.textContent = displayNum;
                 break;
             case 'percent':
+                if(displayNum === '' || displayNum === '0') break;
                 displayNum = `${displayNum/100}`;
                 problem.textContent = displayNum;
                 break;
@@ -145,7 +149,7 @@ function updateAnswer(){
         secondNum = displayNum;
         operate(operat, firstNum, secondNum);     
     }
-    displayNum = '0';
+    displayNum = '';
     problem.textContent = displayNum;
     if(decimalCheck > 0) decimalCheck--;
 }
@@ -153,21 +157,29 @@ function updateAnswer(){
 function operator(btnId){
     switch(btnId){
         case 'plus':
+            if(operat !== '' && displayNum === '' || 
+                firstNum === '' && displayNum === '') break;
             updateAnswer();
             operat = '+'           
             answer.textContent = firstNum + operat + secondNum;   
             break;
         case 'minus':
+            if(operat !== '' && displayNum === '' || 
+                firstNum === '' && displayNum === '') break;
             updateAnswer();
             operat = '-'
             answer.textContent = firstNum + operat + secondNum;
             break;
         case 'multiply':
+            if(operat !== '' && displayNum === '' || 
+                firstNum === '' && displayNum === '') break;
             updateAnswer();
             operat = '*'
             answer.textContent = firstNum + operat + secondNum;
             break;
         case 'divide':
+            if(operat !== '' && displayNum === '' || 
+                firstNum === '' && displayNum === '') break;
             updateAnswer();
             operat = '/'
             answer.textContent = firstNum + operat + secondNum;
@@ -219,22 +231,25 @@ function getDecimalMultiplier(num){
 }
 
 function equals(){
+    if(displayNum !== ''){
     operate(operat, firstNum, displayNum);
     answer.textContent = firstNum;
 
-    displayNum = '0';
+    displayNum = '';
     problem.textContent = displayNum;
     if(decimalCheck > 0) decimalCheck--;
+    }
 }
 
 function clearEntry(){
-    if(displayNum !== '0'){
-        displayNum = '0';
-        problem.textContent = displayNum;
-    } else if(operat !== ''){
-        operat = '';
-        answer.textContent = firstNum;
-    }
+        if(displayNum !== ''){
+            displayNum = '';
+            problem.textContent = displayNum;
+        } else if(operat !== ''){
+            operat = '';
+            answer.textContent = firstNum;
+        }
+        if(decimalCheck > 0) decimalCheck--;
 }
 
 function allClear(){
@@ -246,6 +261,7 @@ function allClear(){
         expression.textContent = '';
         answer.textContent = '';
         problem.textContent = displayNum;
+        if(decimalCheck > 0) decimalCheck--;
 }
 
 
