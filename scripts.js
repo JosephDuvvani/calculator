@@ -19,6 +19,7 @@ let operat = '';
 let secondNum = '';
 
 function operate(op, num1, num2){
+    updateExpression(op, num1, num2);
     switch(op){
         case '+':
             firstNum = add(num1, num2);
@@ -46,6 +47,8 @@ function operate(op, num1, num2){
 const buttons = document.querySelectorAll('button');
 const problem = document.querySelector('#problem');
 const answer = document.querySelector('#answer');
+const expression = document.querySelector('#expression');
+
 
 for(let i = 0; i < buttons.length; i++){
     buttons[i].addEventListener('click', () => { 
@@ -102,7 +105,7 @@ switch(btnId){
         }
 }
 
-function updateExpression(){
+function updateAnswer(){
     if(secondNum !== ''){
         operate(operat,firstNum,secondNum);             
     }
@@ -119,27 +122,42 @@ function updateExpression(){
 function operator(btnId){
     switch(btnId){
         case 'plus':
-            updateExpression();
+            updateAnswer();
             operat = '+'           
             answer.textContent = firstNum + operat + secondNum;   
             break;
         case 'minus':
-            updateExpression();
+            updateAnswer();
             operat = '-'
             answer.textContent = firstNum + operat + secondNum;
             break;
         case 'multiply':
-            updateExpression();
+            updateAnswer();
             operat = '*'
             answer.textContent = firstNum + operat + secondNum;
             break;
         case 'divide':
-            updateExpression();
+            updateAnswer();
             operat = '/'
             answer.textContent = firstNum + operat + secondNum;
             break;
     }
 }
+
+function updateExpression(op, num1, num2){
+    let replaceOperat = '';
+    if(op === '*'){
+        replaceOperat = 'x';
+    }else if(op === '/'){
+        replaceOperat = '÷'
+    }else {
+        replaceOperat = op;
+    }
+    (expression.textContent === '') ? expression.textContent += num1 + replaceOperat + num2 :
+    expression.textContent += replaceOperat + num2;
+}
+
+
 
 
 
