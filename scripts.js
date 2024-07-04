@@ -1,4 +1,4 @@
-function add(num1, num2){
+function add(num1, num2){ 
     let ans = (Number(num1) + Number(num2)).toFixed(getBigDecimal(num1, num2));
     let multiplier = getDecimalMultiplier(ans);
 
@@ -19,9 +19,15 @@ function multiply(num1, num2){
 }
 
 function divide(num1, num2){
-    let ans = (num1 / num2).toFixed(getBigDecimal(num1, num2));
-    let multiplier = getDecimalMultiplier(ans);
-
+    let multiplier = 1;
+    let ans = 0;
+    if(num1 % 1 === 0 && num2 % 1 === 0){
+        ans = (num1 / num2).toFixed(4);
+        multiplier = 1;
+    } else {
+        ans = (num1 / num2).toFixed(getBigDecimal(num1, num2));
+        multiplier = getDecimalMultiplier(ans);
+    }
     return `${(ans * multiplier) / multiplier}`;
 }
 
