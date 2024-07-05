@@ -220,7 +220,7 @@ function operator(btnId){
 function updateExpression(op, num1, num2){
     let replaceOperat = '';
     if(op === '*'){
-        replaceOperat = 'x';
+        replaceOperat = '×';
     }else if(op === '/'){
         replaceOperat = '÷'
     }else {
@@ -258,7 +258,7 @@ function getDecimalMultiplier(num){
 }
 
 function equals(){
-    if(displayNum !== ''){
+    if(displayNum !== '' && firstNum !== '' && operat !== ''){
     operate(operat, firstNum, displayNum);
     if(firstNum === 'divide by zero'){
         zeroErrorOverlay.style.display = 'block';
