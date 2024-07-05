@@ -19,6 +19,9 @@ function multiply(num1, num2){
 }
 
 function divide(num1, num2){
+    if(num2 === '0'){
+        return 'NOT COOL! Can\'t divide by zero'; 
+    }
     let multiplier = 1;
     let ans = 0;
     if(num1 % 1 === 0 && num2 % 1 === 0){
@@ -68,7 +71,10 @@ const expression = document.querySelector('#expression');
 
 
 for(let i = 0; i < buttons.length; i++){
-    buttons[i].addEventListener('click', () => { 
+    buttons[i].addEventListener('click', () => {
+        if(firstNum === 'NOT COOL! Can\'t divide by zero'){
+            allClear();
+        } 
         displayNumber(buttons[i].id);
         operator(buttons[i].id);
     });
@@ -123,7 +129,7 @@ switch(btnId){
                 problem.textContent = displayNum;
                 break;
             case 'sign':
-                if(displayNum !== '0') displayNum = `${displayNum * (-1)}`;
+                if(displayNum !== '') displayNum = `${displayNum * (-1)}`;
                 problem.textContent = displayNum;
                 break;
             case 'percent':
@@ -160,6 +166,10 @@ function operator(btnId){
             if(operat !== '' && displayNum === '' || 
                 firstNum === '' && displayNum === '') break;
             updateAnswer();
+            if(firstNum === 'NOT COOL! Can\'t divide by zero'){
+                answer.textContent = firstNum;
+                break;
+            }
             operat = '+'           
             answer.textContent = firstNum + operat + secondNum;   
             break;
@@ -167,6 +177,10 @@ function operator(btnId){
             if(operat !== '' && displayNum === '' || 
                 firstNum === '' && displayNum === '') break;
             updateAnswer();
+            if(firstNum === 'NOT COOL! Can\'t divide by zero'){
+                answer.textContent = firstNum;
+                break;
+            }
             operat = '-'
             answer.textContent = firstNum + operat + secondNum;
             break;
@@ -174,6 +188,10 @@ function operator(btnId){
             if(operat !== '' && displayNum === '' || 
                 firstNum === '' && displayNum === '') break;
             updateAnswer();
+            if(firstNum === 'NOT COOL! Can\'t divide by zero'){
+                answer.textContent = firstNum;
+                break;
+            }
             operat = '*'
             answer.textContent = firstNum + operat + secondNum;
             break;
@@ -181,6 +199,10 @@ function operator(btnId){
             if(operat !== '' && displayNum === '' || 
                 firstNum === '' && displayNum === '') break;
             updateAnswer();
+            if(firstNum === 'NOT COOL! Can\'t divide by zero'){
+                answer.textContent = firstNum;
+                break;
+            }
             operat = '/'
             answer.textContent = firstNum + operat + secondNum;
             break;
@@ -256,12 +278,13 @@ function allClear(){
         firstNum = '';
         operat = '';
         secondNum = '';
-        displayNum = '0';
+        displayNum = '';
 
         expression.textContent = '';
         answer.textContent = '';
         problem.textContent = displayNum;
         if(decimalCheck > 0) decimalCheck--;
 }
+
 
 
