@@ -1,3 +1,6 @@
+body{
+    margin: 0px;
+}
 *{
     box-sizing: border-box;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
@@ -8,6 +11,20 @@
     align-items: center;
     height: 100vh;
     width: 100%;   
+    background: linear-gradient(45deg,#074173, #1679AB, #5DEBD7, #C5FF95);
+    background-size: 300% 300%;
+    animation: color 12s ease-in-out infinite;
+}
+@keyframes color{
+    0%{
+        background-position: 0 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0 50%;
+    }
 }
 
 #calculator{
