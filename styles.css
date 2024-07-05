@@ -1,3 +1,6 @@
+*{
+    box-sizing: border-box;
+}
 #all-container{
     display: flex;
     justify-content: center;
@@ -11,8 +14,8 @@
 }
 
 #container{
-    width: 450px;
-    height: 500px;
+    width: 500px;
+    height: 550px;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -27,6 +30,8 @@
     border: 1px solid black;
     display: flex;
     flex-direction: column;
+    border-radius: 15px;
+    padding: 0px 10px;
 }
 
 #expression,#answer,#problem{
@@ -42,17 +47,59 @@
 
 #answer{
     flex: 1.5;
+    font-size: 45px;
 }
 
 #problem{
     flex: 1;
+    font-size: 30px;
+ 
 }
 .btn-row{
     flex: 1;
-    border: 1px solid black;
     display: flex;
     gap: 5px;
 }
 button{
     flex: 1;
+    color: azure;
+    background-color: #2874A6;
+    font-size: 20px;
+    border-radius: 45%;
+    border-style: none;
+}
+
+#overlay{
+    position:fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+}
+
+#error-text{
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    width: 450px;
+    height: 200px;
+    font-size: 40px;
+    font-weight: 700;
+    color: white;
+    background-color: rgb(128, 0, 0, 0.8);
+    padding: 10px 0px;
+    border: 5px ridge white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

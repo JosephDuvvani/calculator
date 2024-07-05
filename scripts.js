@@ -19,8 +19,9 @@ function multiply(num1, num2){
 }
 
 function divide(num1, num2){
-    if(num2 === '0'){
-        return 'NOT COOL! Can\'t divide by zero'; 
+    console.log(num1%num2);
+    if(+num2 === 0){
+        return 'divide by zero'; 
     }
     let multiplier = 1;
     let ans = 0;
@@ -68,17 +69,21 @@ const buttons = document.querySelectorAll('button');
 const problem = document.querySelector('#problem');
 const answer = document.querySelector('#answer');
 const expression = document.querySelector('#expression');
+const zeroErrorOverlay = document.querySelector('#overlay');
 
 
 for(let i = 0; i < buttons.length; i++){
     buttons[i].addEventListener('click', () => {
-        if(firstNum === 'NOT COOL! Can\'t divide by zero'){
-            allClear();
-        } 
         displayNumber(buttons[i].id);
         operator(buttons[i].id);
     });
 }
+
+zeroErrorOverlay.addEventListener('click', () => {
+    zeroErrorOverlay.style.display = 'none';
+    allClear();
+});
+
 let displayNum = '0';
 let decimalCheck = 0;
 
@@ -164,12 +169,12 @@ function operator(btnId){
     switch(btnId){
         case 'plus':
             if(operat !== '' && displayNum === '' || 
-                firstNum === '' && displayNum === '') break;
+                firstNum === '' && displayNum === '') break;          
             updateAnswer();
-            if(firstNum === 'NOT COOL! Can\'t divide by zero'){
-                answer.textContent = firstNum;
+            if(firstNum === 'divide by zero'){
+                zeroErrorOverlay.style.display = 'block';
                 break;
-            }
+            }           
             operat = '+'           
             answer.textContent = firstNum + operat + secondNum;   
             break;
@@ -177,8 +182,8 @@ function operator(btnId){
             if(operat !== '' && displayNum === '' || 
                 firstNum === '' && displayNum === '') break;
             updateAnswer();
-            if(firstNum === 'NOT COOL! Can\'t divide by zero'){
-                answer.textContent = firstNum;
+            if(firstNum === 'divide by zero'){
+                zeroErrorOverlay.style.display = 'block';
                 break;
             }
             operat = '-'
@@ -188,8 +193,8 @@ function operator(btnId){
             if(operat !== '' && displayNum === '' || 
                 firstNum === '' && displayNum === '') break;
             updateAnswer();
-            if(firstNum === 'NOT COOL! Can\'t divide by zero'){
-                answer.textContent = firstNum;
+            if(firstNum === 'divide by zero'){
+                zeroErrorOverlay.style.display = 'block';
                 break;
             }
             operat = '*'
@@ -199,8 +204,8 @@ function operator(btnId){
             if(operat !== '' && displayNum === '' || 
                 firstNum === '' && displayNum === '') break;
             updateAnswer();
-            if(firstNum === 'NOT COOL! Can\'t divide by zero'){
-                answer.textContent = firstNum;
+            if(firstNum === 'divide by zero'){
+                zeroErrorOverlay.style.display = 'block';
                 break;
             }
             operat = '/'
@@ -255,7 +260,11 @@ function getDecimalMultiplier(num){
 function equals(){
     if(displayNum !== ''){
     operate(operat, firstNum, displayNum);
-    answer.textContent = firstNum;
+    if(firstNum === 'divide by zero'){
+        zeroErrorOverlay.style.display = 'block';
+    }else {
+        answer.textContent = firstNum;
+    }    
 
     displayNum = '';
     problem.textContent = displayNum;
